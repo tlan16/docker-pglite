@@ -1,0 +1,8 @@
+---
+services:
+  app:
+    image: tlan16/pglite
+    build:
+      context: .
+    ports:
+      - "5432:5432"

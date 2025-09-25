@@ -1,0 +1,10 @@
+{
+  "tasks": {
+    "dev": "deno run --watch main.ts"
+  },
+  "imports": {
+    "@electric-sql/pglite": "npm:@electric-sql/pglite@^0.3.10",
+    "@electric-sql/pglite-socket": "npm:@electric-sql/pglite-socket@^0.0.15",
+    "@std/assert": "jsr:@std/assert@1"
+  }
+}
