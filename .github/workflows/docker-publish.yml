@@ -46,6 +46,8 @@ jobs:
             type=gha
             type=registry,ref=${{ secrets.DOCKER_USERNAME }}/docker-pglite:latest
           cache-to: type=gha,mode=max
+          with:
+            push: true
       - uses: peter-evans/dockerhub-description@v3
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
