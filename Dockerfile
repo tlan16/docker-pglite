@@ -1,4 +1,4 @@
-FROM denoland/deno:distroless AS builder
+FROM denoland/deno:alpine AS builder
 
 WORKDIR /app
 COPY . .
