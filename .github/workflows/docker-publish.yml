@@ -22,7 +22,7 @@ jobs:
       - uses: docker/metadata-action@v5
         id: meta
         with:
-          images: Build
+          images: ${{ secrets.DOCKER_USERNAME }}/pglite:latest
       - uses: actions/cache@v4
         id: cache
         with:
@@ -41,16 +41,15 @@ jobs:
       - uses: docker/build-push-action@v5
         with:
           platforms: linux/amd64,linux/arm64
-          tags: ${{ secrets.DOCKER_USERNAME }}/docker-pglite:latest
+          tags: ${{ secrets.DOCKER_USERNAME }}/pglite:latest
           cache-from: |
             type=gha
-            type=registry,ref=${{ secrets.DOCKER_USERNAME }}/docker-pglite:latest
+            type=registry,ref=${{ secrets.DOCKER_USERNAME }}/pglite:latest
           cache-to: type=gha,mode=max
-          with:
-            push: true
+          push: true
       - uses: peter-evans/dockerhub-description@v3
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_TOKEN }}
-          repository: ${{ secrets.DOCKER_USERNAME }}/docker-pglite
-          short-description: 'qBittorrent Enhanced Edition'
+          repository: ${{ secrets.DOCKER_USERNAME }}/pglite
+          short-description: 'PGlite server packaged with Deno'
