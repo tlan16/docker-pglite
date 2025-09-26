@@ -41,7 +41,7 @@ const main = async () => {
 
 main()
   .then(() => {
-    console.log('Server started on 127.0.0.1:5432')
+    console.log('Server started on 0.0.0.0:5432')
   })
   .catch(console.error)
 
