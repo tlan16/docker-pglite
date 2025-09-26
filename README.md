@@ -2,6 +2,10 @@
 
 Lightweight Docker image for running a PGlite server (Electric SQL pglite + pglite-socket) using Bun. The repository now uses `index.ts` as the entrypoint (runs under Bun and is compiled to a single binary at `dist/app` by the Dockerfile). This README doubles as the image description for Docker Hub.
 
+Source code: https://github.com/tlan16/docker-pglite
+
+[Apache License](https://github.com/tlan16/docker-pglite/blob/main/LICENSE)
+
 ## Features
 
 - Starts a PGlite socket server (default port 5432)
