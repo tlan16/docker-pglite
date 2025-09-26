@@ -14,13 +14,6 @@ Source code: https://github.com/tlan16/docker-pglite
 - Docker Compose included for easy local bring-up
 - Healthcheck script included (see `healthcheck.sh`)
 
-## What changed (refactor notes)
-
-- Runtime: moved from Deno to Bun / Node-compatible code (project now uses CommonJS-style requires and a Bun build pipeline).
-- Entry point: `index.ts` (compiled to `/app/dist/app` by the Dockerfile).
-- Default data directory: the project creates a local `data` directory by default (relative to the working directory in the container this resolves to `/app/data`).
-- Server binding: current `index.ts` binds the socket server to `127.0.0.1:5432` by default. If you need the server reachable from outside the container, change the host to `0.0.0.0` (see instructions below).
-
 ## Quickstart
 
 Build the Docker image locally (tag matches docker-compose):
