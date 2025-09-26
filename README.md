@@ -86,6 +86,12 @@ docker compose up -d
 
 The compose file builds and uses the image tag `tlan16/pglite` (the project Dockerfile produces the compiled binary at `/app/dist/app` and the container runs that binary).
 
+### Example client connection uri
+
+```shell
+psql 'postgresql://postgres:do_not_matter@localhost:5432/template1?sslmode=disable&gssencmode=disable'
+```
+
 ## Local development (Bun)
 
 Requirements: Bun installed.

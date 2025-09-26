@@ -25,7 +25,7 @@ const main = async () => {
   const server = new PGLiteSocketServer({
     db,
     port: 5432,
-    host: '127.0.0.1',
+    host: '0.0.0.0',
     debug: appConfig.NODE_ENV === 'production',
   })
 

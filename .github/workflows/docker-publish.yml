@@ -46,6 +46,17 @@ jobs:
             type=gha
             type=registry,ref=${{ secrets.DOCKER_USERNAME }}/pglite:latest
           cache-to: type=gha,mode=max
+          push: false
+      - name: Tests
+        run: tests/run.sh
+      - uses: docker/build-push-action@v5
+        with:
+          platforms: linux/amd64,linux/arm64
+          tags: ${{ secrets.DOCKER_USERNAME }}/pglite:latest
+          cache-from: |
+            type=gha
+            type=registry,ref=${{ secrets.DOCKER_USERNAME }}/pglite:latest
+          cache-to: type=gha,mode=max
           push: true
       - uses: peter-evans/dockerhub-description@v3
         with:

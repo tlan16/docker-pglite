@@ -2,3 +2,6 @@
 .vscode/
 .DS_Store
 node_modules/
+/pgdata/
+/dist/
+/build/
