@@ -113,7 +113,93 @@ bun build --compile --minify --sourcemap --bytecode index.ts --outfile dist/app
 
 ## Tests
 
-The repository currently has no automated test runner configured. If you add tests, prefer Bun test tooling or a Node-friendly test runner and document it here.
+```shell
+tests/run.sh
+```
+
+<details>
+<summary>Example output</summary>
+
+```text
+➜  docker-pglite git:(main) tests/run.sh 
+[+] Building 4.0s (24/24) FINISHED                                                                                                                                                                                                        
+ => [internal] load local bake definitions                                                                                                                                                                                           0.0s
+ => => reading from stdin 527B                                                                                                                                                                                                       0.0s
+ => [internal] load build definition from Dockerfile                                                                                                                                                                                 0.0s 
+ => => transferring dockerfile: 1.03kB                                                                                                                                                                                               0.0s 
+ => [internal] load metadata for docker.io/library/alpine:latest                                                                                                                                                                     2.4s 
+ => [internal] load metadata for docker.io/oven/bun:alpine                                                                                                                                                                           2.4s
+ => [auth] library/alpine:pull token for registry-1.docker.io                                                                                                                                                                        0.0s
+ => [auth] oven/bun:pull token for registry-1.docker.io                                                                                                                                                                              0.0s
+ => [internal] load .dockerignore                                                                                                                                                                                                    0.0s 
+ => => transferring context: 154B                                                                                                                                                                                                    0.0s 
+ => [builder 1/8] FROM docker.io/oven/bun:alpine@sha256:ab596b6d0dcad05d23799b89451e92f4cdc16da184a9a4d240c42eaf3c4b9278                                                                                                             0.0s 
+ => [internal] load build context                                                                                                                                                                                                    0.0s 
+ => => transferring context: 6.09kB                                                                                                                                                                                                  0.0s 
+ => [stage-1 1/6] FROM docker.io/library/alpine:latest@sha256:4bcff63911fcb4448bd4fdacec207030997caf25e9bea4045fa6c8c44de311d1                                                                                                       0.0s 
+ => CACHED [builder 2/8] WORKDIR /app/data                                                                                                                                                                                           0.0s 
+ => CACHED [builder 3/8] WORKDIR /app                                                                                                                                                                                                0.0s
+ => CACHED [builder 4/8] ADD package.json bun.lock ./                                                                                                                                                                                0.0s 
+ => CACHED [builder 5/8] RUN --mount=type=cache,target=/root/.bun/install/cache   bun install --frozen-lockfile                                                                                                                      0.0s 
+ => [builder 6/8] COPY . .                                                                                                                                                                                                           0.3s 
+ => [builder 7/8] RUN bun build --compile --minify --sourcemap --bytecode index.ts --outfile dist/app                                                                                                                                0.3s 
+ => [builder 8/8] RUN --mount=type=cache,target=/root/.bun/install/cache   bun install --frozen-lockfile --production                                                                                                                0.1s 
+ => CACHED [stage-1 2/6] RUN --mount=type=cache,target=/var/cache/apk     --mount=type=cache,target=/etc/apk/cache   apk add --no-cache postgresql-client libstdc++ libgcc libc6-compat                                              0.0s 
+ => [stage-1 3/6] COPY --from=builder /app/dist/ /app/dist/                                                                                                                                                                          0.0s 
+ => [stage-1 4/6] COPY --from=builder /app/node_modules/ /app/node_modules/                                                                                                                                                          0.2s 
+ => [stage-1 5/6] COPY healthcheck.sh /app/healthcheck.sh                                                                                                                                                                            0.0s 
+ => [stage-1 6/6] WORKDIR /app                                                                                                                                                                                                       0.0s 
+ => exporting to image                                                                                                                                                                                                               0.2s 
+ => => exporting layers                                                                                                                                                                                                              0.2s 
+ => => writing image sha256:62647ca6a1c486f81ed234ac80e865587feaf2538dd2512b7084aebbcc24361f                                                                                                                                         0.0s 
+ => => naming to docker.io/tlan16/pglite                                                                                                                                                                                             0.0s 
+ => resolving provenance for metadata file                                                                                                                                                                                           0.0s 
+[+] Running 2/2                                                                                                                                                                                                                           
+ ✔ tlan16/pglite                  Built                                                                                                                                                                                              0.0s 
+ ✔ Container docker-pglite-app-1  Healthy                                                                                                                                                                                           11.8s 
+DROP TABLE
+CREATE TABLE
+INSERT 0 3
+DO
+DO
+DO
+ id |    name     | hire_date  |  salary  
+----+-------------+------------+----------
+  1 | Alice Smith | 2024-07-10 | 85000.00
+  2 | Bob Chen    | 2025-01-22 | 93000.00
+  3 | Carla Diaz  | 2025-09-26 | 78000.00
+(3 rows)
+
+    name     |  salary  
+-------------+----------
+ Alice Smith | 85000.00
+ Bob Chen    | 93000.00
+ Carla Diaz  | 78000.00
+(3 rows)
+
+ id |    name     | hire_date  |  salary  
+----+-------------+------------+----------
+  1 | Alice Smith | 2024-07-10 | 85000.00
+  2 | Bob Chen    | 2025-01-22 | 93000.00
+(2 rows)
+
+ id |    name     |  salary  
+----+-------------+----------
+  2 | Bob Chen    | 93000.00
+  1 | Alice Smith | 85000.00
+  3 | Carla Diaz  | 78000.00
+(3 rows)
+
+    name    | hire_date  
+------------+------------
+ Bob Chen   | 2025-01-22
+ Carla Diaz | 2025-09-26
+(2 rows)
+
+Time: 17s                                           
+```
+
+</details>
 
 ## Healthcheck
 
