@@ -5,6 +5,7 @@ node_modules/
 /pgdata/
 /dist/
 /build/
+*.bun-build
 
 # Docker specific files
 .gitignore

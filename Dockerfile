@@ -7,6 +7,10 @@ ENV PGUSER=postgres
 ENV PGPASSWORD=dot_not_matter
 ENV PGSSLMODE=disable
 
+RUN --mount=type=cache,target=/var/cache/apk \
+    --mount=type=cache,target=/etc/apk/cache \
+  apk add --no-cache binutils
+
 WORKDIR /app/data
 WORKDIR /app
 
@@ -15,6 +19,7 @@ RUN --mount=type=cache,target=/root/.bun/install/cache \
   bun install --frozen-lockfile
 COPY . .
 RUN bun build --compile --minify --sourcemap --bytecode index.ts --outfile dist/app
+
 RUN --mount=type=cache,target=/root/.bun/install/cache \
   bun install --frozen-lockfile --production
 
