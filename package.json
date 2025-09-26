@@ -1,0 +1,19 @@
+{
+  "name": "docker-pglite",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "scripts": {
+    "start": "bun index.ts"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "@electric-sql/pglite-socket": "^0.0.15",
+    "zod": "^4.1.11"
+  }
+}

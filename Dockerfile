@@ -1,17 +1,29 @@
-FROM denoland/deno:alpine AS builder
+FROM oven/bun:alpine AS builder
+ENV NODE_ENV=${NODE_ENV:-production}
+
+ENV PGHOST=0.0.0.0
+ENV PGPORT=${PGPORT:-5432}
+ENV PGUSER=postgres
+ENV PGPASSWORD=dot_not_matter
+ENV PGSSLMODE=disable
+
+WORKDIR /app/data
+WORKDIR /app
+
+ADD package.json bun.lock ./
+RUN bun install
+COPY . .
+RUN bun build --compile --minify --sourcemap --bytecode index.ts --outfile dist/app
+RUN bun install --production
+
+FROM alpine
+RUN apk add --no-cache postgresql-client libstdc++ libgcc libc6-compat
+
+COPY --from=builder /app/dist/ /app/dist/
+COPY --from=builder /app/node_modules/ /app/node_modules/
+COPY healthcheck.sh /app/healthcheck.sh
 
 WORKDIR /app
-COPY . .
-
-# Use Docker cache mount for Deno dependencies
-RUN --mount=type=cache,target=/deno-dir \
-    deno cache main.ts
-
-RUN --mount=type=cache,target=/deno-dir \
-    deno compile --allow-net=0.0.0.0:5432 --output /dist main.ts
-
-FROM gcr.io/distroless/cc AS runner
-
-COPY --from=builder /dist /dist
-CMD ["/dist"]
-EXPOSE 5432
+ENTRYPOINT []
+CMD ["/app/dist/app"]
+HEALTHCHECK --interval=1m --start-period=10s --start-interval=1s CMD /app/healthcheck.sh
