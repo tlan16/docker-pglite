@@ -4,7 +4,7 @@
     "": {
       "name": "docker-pglite",
       "dependencies": {
-        "@electric-sql/pglite-socket": "^0.0.15",
+        "@electric-sql/pglite-socket": "^0.0.16",
         "zod": "^4.1.11",
       },
       "devDependencies": {
@@ -18,7 +18,7 @@
   "packages": {
     "@electric-sql/pglite": ["@electric-sql/pglite@0.3.10", "", {}, "sha512-1XtXXprd848aR4hvjNqBc3Gc86zNGmd60x+MgOUShbHYxt+J76N8A81DqTEl275T8xBD0vdTgqR/dJ4yJyz0NQ=="],
 
-    "@electric-sql/pglite-socket": ["@electric-sql/pglite-socket@0.0.15", "", { "peerDependencies": { "@electric-sql/pglite": "0.3.10" }, "bin": { "pglite-server": "dist/scripts/server.js" } }, "sha512-F4vuqDSoqm4ajm3D/6jiMW6ESzPo12V2S7GOMHa9Akb/QfMPfPN8DKhe19wN9a59Dr214SbqYddqk6jk8KB9hg=="],
+    "@electric-sql/pglite-socket": ["@electric-sql/pglite-socket@0.0.16", "", { "peerDependencies": { "@electric-sql/pglite": "0.3.11" }, "bin": { "pglite-server": "dist/scripts/server.js" } }, "sha512-Gl69ssPrFjS9QwAYotruKeQtgzXAnZMN+hZgHhP+RuxSh8CNj+DTmE07K+OjSHjqtjZDQC6n0D0EEIUEDDQwTw=="],
 
     "@types/bun": ["@types/bun@1.2.22", "", { "dependencies": { "bun-types": "1.2.22" } }, "sha512-5A/KrKos2ZcN0c6ljRSOa1fYIyCKhZfIVYeuyb4snnvomnpFqC0tTsEkdqNxbAgExV384OETQ//WAjl3XbYqQA=="],
 
