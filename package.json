@@ -13,7 +13,7 @@
     "typescript": "^5"
   },
   "dependencies": {
-    "@electric-sql/pglite-socket": "^0.0.18",
+    "@electric-sql/pglite-socket": "^0.0.19",
     "zod": "^4.1.11"
   }
 }
